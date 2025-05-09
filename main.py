@@ -1,20 +1,21 @@
 import selenium
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
 import time
 from configparser import ConfigParser 
 
-service = webdriver.FirefoxService()
 options = webdriver.FirefoxOptions()
 
 # headless mode
 options.add_argument("-headless")
 
+service = Service(executable_path='./geckodriver')
 driver = webdriver.Firefox(service=service, options=options)
 
 # read config file
 configur = ConfigParser()
-configur.read('config.ini')
+configur.read('./config.ini')
 
 link = str(configur.get('configuration', 'login_page_link'))
 login_username = str(configur.get('configuration', 'username'))
